@@ -1,0 +1,1 @@
+This folder contains the assignments for the JavaScript module of MEAN stack.
