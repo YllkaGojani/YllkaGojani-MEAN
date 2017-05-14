@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Epic Button Game</title>
+	<style type="text/css">
+		body{
+			text-align: center;
+		}
+		#container{
+			margin: 0 30%;
+			width: 50%;
+		}
+		#push{
+			background-color: blue;
+			border-radius: 30%;
+			border: 2px solid black;
+			padding:6%;
+			color: white;
+		}
+		#reset{
+			background-color: red;7
+			border-radius: 10%;
+			border: 1px solid black;
+			padding:2%;
+			float: right;
+			margin-top: 5%;
+		}
+	</style>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js">
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			var socket = io.connect();
+
+			$('#push').click(function()
+			{
+				socket.emit('push_button',{action: 'Somebody pushed the epic button'});
+			});
+			$('#reset').click(function()
+			{
+				socket.emit('reset_counter',{action: 'Resetting counter'});
+			});
+
+			socket.on('push_counter',function(data)
+			{
+				$('#message').html('The button has been pushed ' + JSON.stringify(data.response) + ' times.');
+			});
+			socket.on('reset_response',function(data)
+			{
+				$('#message').html('');
+			});
+		})
+	</script>
+</head>
+<body>
+<div id="container">
+	<h2 id="message"></h2>
+	<h4>Push the button to update the count!</h4>
+	<button id="push">Push the epic button!</button>
+	<br>
+	<button id="reset">Reset counter</button>
+</div>
+</body>
+</html>
