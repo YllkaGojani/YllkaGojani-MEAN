@@ -1,0 +1,1 @@
+This folder contains the assignment from the MongoDB section.
