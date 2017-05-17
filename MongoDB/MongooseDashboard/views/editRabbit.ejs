@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit Rabbit</title>
+</head>
+<body>
+<form action="/rabbits/<%=rabbit.id %>" method="post">
+	<p><label>Name: </label><input type="text" name="name" value="<%=rabbit.name %>"></p>
+	<p><label>Age: </label><input type="number" name="age" value="<%=rabbit.age %>"></p>
+	<p><label>Color: </label><input type="text" name="color" value="<%=rabbit.color %>"></p>
+	<p><input type="submit" value="Edit existing rabbit!"></p>
+</form>
+</body>
+</html>
