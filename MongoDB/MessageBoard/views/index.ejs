@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Message Board</title>
+  </head>
+  <body>
+   <% if(typeof(errors) != 'undefined' ) { %>
+     <% for (var x in errors) { %>
+      <h3><%= errors.message %></h3>
+     <% } %>
+ <% } %>
+  <hr><hr>
+    <form action="/message_board" method="post">
+      <p>Name: </p><input type="text" name="name">
+      <p>Message: </p><textarea  name="text" rows="8" cols="80"></textarea>
+      <input type="submit" value="Post message" id="post">
+    </form>
+   <hr><hr> 
+    <% for(var post of posts){%>
+      <h3><%= post.name %></h3>
+      <h3><%= post.text %></h3>
+      <p><%for(var comment of post.comments){%>
+          <h5><%= comment.name%></h5>
+          <h5><%= comment.text%></h5>
+        <%}%>
+      </p>
+      <form action="/create_comment" method="post">
+        <input type="hidden" name="_post" value="<%=post._id%>">
+        <p class="margin">Name: </p><input class="comment_input" type="text" name="name"><br>
+        <p class="margin">Comment:</p><textarea class="comment_input" name="text" rows="8" cols="80"></textarea> <br>
+        <input type="submit" value="Post a comment" class="post2">
+      </form>
+      <hr>
+      <%}%>
+  </body>
+</html>
+<style type="text/css">
+
+*{
+	font-family: geneva;
+}
+input, textarea{
+	display: block;
+	margin-bottom: 2em;
+}
+textarea{
+	width: 60%;
+	height: 10em;
+}
+h5, .comment_input {
+	margin-left: 12%;
+}
+#post {
+	color:white;
+	background-color: blue;
+	margin-left: 36.7%;
+	width:15em;
+	height: 3em;
+}
+.comment_text {
+	width: 40%;
+	height: 6em;
+	margin-left: 12%; 
+}
+.margin{
+	margin-left: 12%;
+	margin-bottom: -.1em;
+}
+.post2 {
+	color:white;
+	background-color: green;
+	margin-left: 33.2%;
+	width:12em;
+	height: 2.5em;
+}
+</style>

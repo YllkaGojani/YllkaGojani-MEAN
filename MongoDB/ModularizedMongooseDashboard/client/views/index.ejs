@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rabbits Dashboard</title>
+<style type="text/css">
+	div:nth-child(2n+1){
+		text-indent: 2%;
+	}
+</style>
+</head>
+<body>
+<h1>The Rabbits</h1>
+<a href="/rabbits/new"><button>Add new rabbit!</button></a>
+<% for (rabbit of rabbits){%>
+<div>
+	<p>ID: <%= rabbit.id %></p>
+	<p>Name: <%= rabbit.name %></p>
+	<p>Age: <%= rabbit.age %></p>
+	<p>Color: <%= rabbit.color %></p>	
+	<p><a href="/rabbits/edit/<%= rabbit._id%>"><button>Edit rabbit</button></a> <a href="/rabbits/<%= rabbit._id%>"><button>Show rabbit</button></a>
+	<form action="/rabbits/destroy/<%= rabbit._id %>" method='post'>
+       <input type="submit" value="Delete rabbit">
+    </form></p>
+</div>
+<%}%>
+
+</body>
+</html>
