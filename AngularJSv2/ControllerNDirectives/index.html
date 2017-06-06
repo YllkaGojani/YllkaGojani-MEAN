@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>Document</title>
+    <script src="bower_components/angular/angular.js" charset="utf-8">
+    </script>
+    <script>
+        var myApp = angular.module('myApp', []);
+        myApp.controller('productsCtrl', ['$scope', function($scope) {
+            $scope.products = [];
+            $scope.addProduct = function() {
+                $scope.products.push($scope.product);
+                $scope.product = "";
+            }
+        }]);
+    </script>
+
+</head>
+
+<body>
+    <div ng-controller='productsCtrl'>
+        <form ng-submit="addProduct()">
+            <label>Favourite Food <input type="text" ng-model='product'></label>
+            <input type="submit" value="Add Food">
+        </form>
+        <p ng-if="product">
+            Currently typing <b>{{product}}</b>
+        </p>
+        <br>
+        <input placeholder="filter..." type="text" ng-model="productFilter">
+        <div ng-repeat="product in products | filter:productFilter track by $index">
+            <p>{{product}}</p>
+        </div>
+    </div>
+</body>
+</html>

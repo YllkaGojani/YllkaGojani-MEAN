@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>Controlling Users</title>
+	<script src="bower_components/angular/angular.js"></script>
+	<script type="text/javascript">
+		var myApp = angular.module('myApp',[]);
+		myApp.controller('usersCtrl',['$scope',function($scope){
+			$scope.users=[
+				{first_name: 'Yllka',last_name:'Gojani', fav_language:'JS'}
+			];
+			$scope.newUser = {};
+			$scope.addUser = function(){
+				$scope.users.push({'first_name':$scope.newUser.first_name, 'last_name': $scope.newUser.last_name,'fav_language':$scope.newUser.fav_language});
+				$scope.newUser.first_name = '';
+				$scope.newUser.last_name = '';
+				$scope.newUser.fav_language ='';
+
+			}
+			$scope.removeUser = function(userToRemove){
+				var index = $scope.users.indexOf(userToRemove);
+    			$scope.users.splice(index, 1);
+			}
+		}]);
+	</script>
+	<style type="text/css">
+		th, td{
+			width:100px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div ng-controller="usersCtrl">
+		<form>
+			<p><label>First Name:</label><input type="text" ng-model="newUser.first_name"></p>
+			<p><label>Last Name:</label><input type="text" ng-model="newUser.last_name"></p>
+			<p><label>Favourite Language:</label><input type="text" ng-model="newUser.fav_language"></p>
+			<button ng-click="addUser()">Create User</button>
+		</form>
+		<table>
+			<tr><th>First Name</th><th>Last Name</th><th>Fav Language</th><th>Remove user</th></tr>
+			<tr ng-repeat="user in users">
+				<td>{{user.first_name}}</td>
+				<td>{{user.last_name}}</td>
+				<td>{{user.fav_language}}</td>
+				<td><button ng-click="removeUser(user)">Remove</button></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

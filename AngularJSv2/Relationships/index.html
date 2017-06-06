@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- telling the file that everything between html tags is angular JS using the module myApp -->
+<html ng-app="myApp"> 
+<head>
+	<title>Angular</title>
+	<!-- to be able to use angular we need this script -->
+	<script src = 'bower_components/angular/angular.js'></script>
+
+	<script type="text/javascript">
+		// instantiating our module
+		var myAppModule = angular.module('myApp',[]);
+		// creating a controller
+		// passing $scope into the function we use to make the controller(a dependency injection)
+		myAppModule.controller('studentsController', function ($scope){
+			$scope.students = [
+				{name: 'Mike', age: 34}, 
+				{name: 'John', age: 24}, 
+				{name: 'Trey', age: 24}, 
+				{name: 'India', age: 35}
+			];
+			$scope.addStudent = function (){
+				// add to the array
+				$scope.students.push($scope.newStudent); 
+				// clear the form values
+				$scope.newStudent = {};
+			}
+      });
+	</script>
+</head>
+<body ng-init="dojo='ninja'">
+	<h1>{{dojo}}</h1>
+ 	<div ng-controller='studentsController'>
+ 	<h3>Add a new student!</h3>
+	<form>
+	    Name: <input type='text' ng-model='newStudent.name'>
+	    Age: <input type='text' ng-model='newStudent.age'>
+	    <input type='submit' value='add new student' ng-click='addStudent()'>
+	</form>
+    <ul>
+        <li ng-repeat="student in students">{{ student.name }},{{ student.age }}</li>
+    </ul>     
+</body>
+</html>
